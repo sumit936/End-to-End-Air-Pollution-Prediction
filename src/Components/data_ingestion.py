@@ -5,6 +5,7 @@ from src.logger import logging
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
+from src.Components.data_transformation import DataTransformation
 
 @dataclass
 
@@ -50,4 +51,6 @@ class DataIngestion:
 if __name__ == "__main__":
 
     obj = DataIngestion()
-    obj.data_ingestion_initiated()
+    train_path, test_path = obj.data_ingestion_initiated()
+    transformer = DataTransformation()
+    transformer.initiate_data_transformation(train_path, test_path)
