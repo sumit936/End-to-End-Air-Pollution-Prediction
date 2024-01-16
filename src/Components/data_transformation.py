@@ -26,6 +26,8 @@ class DataTransformation:
             self.data_transformation_config = DataTransformationConfig()
         
         def outlier_handler(self,data):
+            logging.info("Entered into outlier handler function")
+
             try:
                 for feature_name in data.columns:
                     Q1 = data[feature_name].quantile(0.25)
@@ -40,11 +42,13 @@ class DataTransformation:
                     
                     data[feature_name] = np.where(data[feature_name]>upper_limit,upper_limit,
                                                 np.where(data[feature_name]<lower_limit,lower_limit,data[feature_name]))
+                logging.info('Outlier Removal Completed!')
                 return data
             except Exception as e:
                 raise CustomException(e, sys)
             
         def to_category(self, val):
+            
             try:
                 if val>0 and val<=50:
                     return 0
@@ -83,7 +87,7 @@ class DataTransformation:
 
                 preprocessor = ColumnTransformer(
                     [
-                        ('num_pipeline', FunctionTransformer(self.outlier_handler), outlier_col),
+                        ('oh', FunctionTransformer(self.outlier_handler), outlier_col),
                         ('scaler', StandardScaler(), all_col)
 
                     ]
@@ -107,18 +111,22 @@ class DataTransformation:
                 train_df['AQI (Category Range)'] = train_df['AQI'].apply(self.to_category)
                 test_df['AQI (Category Range)'] = test_df['AQI'].apply(self.to_category)
 
-                logging.info('Obtaining data preprocessing object')
+                logging.info("New feature Created.")
+
+                logging.info('Obtaining data preprocessing object..')
 
 
                 preprocessing_obj = self.get_data_transformation_obj()
 
+                logging.info('Object Obatained.')
+
                 target_feature_name = 'AQI'
 
                 
-                # input_feature_train = train_df.drop(target_feature_name, axis=1)
+                input_feature_train = train_df.drop(target_feature_name, axis=1)
                 target_feature_train = train_df[target_feature_name]
 
-                # input_feature_test = test_df.drop(target_feature_name, axis = 1)
+                input_feature_test = test_df.drop(target_feature_name, axis = 1)
                 target_feature_test = test_df[target_feature_name]
 
                 logging.info('Applying preprocessing object on training and testing dataframe')
