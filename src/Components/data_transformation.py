@@ -121,12 +121,12 @@ class DataTransformation:
                 logging.info('Object Obatained.')
 
                 target_feature_name = 'AQI'
-
+                classification_target_feature_name = 'AQI (Category Range)'
                 
-                input_feature_train = train_df.drop(target_feature_name, axis=1)
+                input_feature_train = train_df.drop([target_feature_name,classification_target_feature_name],axis=1)
                 target_feature_train = train_df[target_feature_name]
 
-                input_feature_test = test_df.drop(target_feature_name, axis = 1)
+                input_feature_test = test_df.drop([target_feature_name,classification_target_feature_name], axis = 1)
                 target_feature_test = test_df[target_feature_name]
 
                 logging.info('Applying preprocessing object on training and testing dataframe')
