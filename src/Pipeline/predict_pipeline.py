@@ -14,13 +14,13 @@ class PredictPipeline():
     def predict(self,features):
         logging.info("Entered prediction function!")
         try:
-            model_path = os.path.join('artifacts','modle.pkl')
+            model_path = os.path.join('artifacts','model.pkl')
             preprocessor_path = os.path.join('artifacts','preprocessor.pkl')
 
-            # loading the model and preprocessor picle file
+            # loading the model and preprocessor pickle file
             logging.info("Loading the model and preprocessor pickle file..")
-            model = load_object(os.path.dirname(model_path))
-            preprocessor = load_object(os.path.dirname(preprocessor_path))
+            model = load_object(model_path)
+            preprocessor = load_object(preprocessor_path)
             
             logging.info('Pickle file loaded.')
 
@@ -46,9 +46,10 @@ class CustomData:
             no2:float, 
             Rainfall:float, 
             PM10:int, 
-            PM25:float):
+            PM25:float
+            ):
 
-            self.Temperature = Temperature,
+            self.Temperature = Temperature
             self.Humidity = Humidity
             self.Wind_Speed = Wind_Speed
             self.Visibility = Visibility
@@ -61,12 +62,21 @@ class CustomData:
         
         def get_data_as_data_frame(self):
 
-            data = {'Temperature':[self.Temperature], 'Humidity':[self.Humidity], 'Wind.Speed..km.h.':[self.Wind_Speed], 'Visibility':[self.Visibility],
+            data = {'Temperature': [self.Temperature], 'Humidity':[self.Humidity], 'Wind.Speed..km.h.':[self.Wind_Speed], 'Visibility':[self.Visibility],
        'Pressure':[self.Pressure], 'so2':[self.so2], 'no2':[self.no2], 'Rainfall':[self.Rainfall], 'PM10':[self.PM10], 'PM25':[self.PM25]
        }
             return pd.DataFrame(data)
     except Exception as e:
         raise CustomException(e,sys)
+    
+# if __name__ == '__main__':
+    
+#     obj = CustomData(9.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9,10.0)
+#     df = obj.get_data_as_data_frame()
+#     print(df)
+#     Preds = PredictPipeline()
+#     pred = Preds.predict(df)
+#     print(pred)
         
 
         

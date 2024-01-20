@@ -82,7 +82,7 @@ class DataTransformation:
             try:
                 outlier_col = ['PM10', 'PM25', 'so2', 'no2']
                 all_col = ['Temperature', 'Humidity', 'Wind.Speed..km.h.', 'Visibility',
-       'Pressure', 'so2', 'no2', 'Rainfall', 'PM10', 'PM25','AQI (Category Range)']
+       'Pressure', 'so2', 'no2', 'Rainfall', 'PM10', 'PM25']
 
 
                 preprocessor = ColumnTransformer(
@@ -131,8 +131,8 @@ class DataTransformation:
 
                 logging.info('Applying preprocessing object on training and testing dataframe')
 
-                input_feature_train_arr = preprocessing_obj.fit_transform(train_df)
-                input_feature_test_arr = preprocessing_obj.fit_transform(test_df)
+                input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train)
+                input_feature_test_arr = preprocessing_obj.fit_transform(input_feature_test)
 
                 train_arr = np.c_[
 
