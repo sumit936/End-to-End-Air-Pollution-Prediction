@@ -74,11 +74,60 @@ def hello_world():
     allFeat = Prediction.query.all()
     return render_template('index.html', allFeat = allFeat)
 
-@app.route('/show')
-def show():
-    allFeat = Prediction.query.all()
-    print(allFeat)
-    return f'this is prediction page'
+@app.route('/update/<int:SNo>', methods = ['GET','POST'])
+def update(SNo):
+    if request.method == 'POST':
+        Temp = request.form['Temperature']
+        Hum = request.form['Humidity']
+        WS = request.form['Wind speed']
+        Vis = request.form['Visibility']
+        Pres = request.form['Pressure']
+        so2 = request.form['so2']
+        no2 = request.form['no2']
+        Rain = request.form['Rainfall']
+        PM10 = request.form['PM10']
+        PM25 = request.form['PM25']
+        data = CustomData(float(Temp),
+                          float(Hum),
+                          float(WS),
+                          float(Vis),
+                          float(Pres),
+                          float(so2),
+                          float(no2),
+                          float(Rain),
+                          int(PM10),
+                          float(PM25)
+                         )
+        
+        df = data.get_data_as_data_frame()
+        pred = PredictPipeline()
+        preds = round(pred.predict(df),2)
+        predobj = Prediction(
+                            Temperature = Temp,
+                            Humidity = Hum,
+                            Wind_Speed = WS,
+                            Visibility = Vis,
+                            Pressure = Pres,
+                            so2 = so2,
+                            no2 = no2,
+                            Ranifall = Rain,
+                            PM10 = PM10,
+                            PM25 = PM25,
+                            prediction = preds
+                            )
+        
+        db.session.add(predobj)
+        db.session.commit()
+        return redirect("/")
+    Feat = Prediction.query.filter_by(SNo = SNo).first()
+    return render_template('update.html', Feat = Feat)
+@app.route('/delete/<int:SNo>')
+def delete(SNo):
+    delobj = Prediction.query.filter_by(SNo = SNo).first()
+    db.session.delete(delobj)
+    db.session.commit()
+    return redirect("/")
+
 
 if __name__ == "__main__":
     app.run(debug  = True, port=7000)

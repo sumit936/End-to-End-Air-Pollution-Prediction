@@ -1,163 +1,118 @@
-<!doctype html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block body %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-    <title>Air Pollution Prediction</title>
-</head>
-
-<body>
-    <!--Navigation Bar start-->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">Air Pollutoin Prediction</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-        </div>
-    </nav>
-    <!--Navigation Bar End-->
-
-    <!--Input field start-->
-    <form action="/" method="POST">
-        <div class="d-flex align-items-center justify-content-center">
-            <div class="card text-center">
-                <div class="card text-bg-success m-b3 " style="max-width: 40rem; ">
-                    <div class="card-header" style="color: black;">
-                        Air Quality Prediction
-                    </div>
-                    <div class="card-body" style="color: black;">
-                        <h6 class="card-title">Provide Input to Predict AQI</h6>
-                        <div class="card-footer text-body-secondary">
-                            <i>Below are the field of input to predict AQI(Air Quality Index)</i>
-                        </div>
+<!--Input field start-->
+<form action="/" method="POST">
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="card text-center">
+            <div class="card text-bg-success m-b3 " style="max-width: 40rem; ">
+                <div class="card-header" style="color: black;">
+                    Air Quality Prediction
+                </div>
+                <div class="card-body" style="color: black;">
+                    <h6 class="card-title">Provide your Input to Predict AQI</h6>
+                    <div class="card-footer text-body-secondary">
+                        <i>Below are the fields of input to predict AQI(Air Quality Index)</i>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container" style="width: 80%;">
-            <div class="input-group mb-3 mx-1">
-                <span class="input-group-text">Temperature</span>
-                <input type="number" class="form-control me-2" name="Temperature" id="Temperature" step=any
-                    placeholder="Temperature">
-                <span class="input-group-text">Humidity</span>
-                <input type="number" class="form-control me-2" name="Humidity" id="Humidity" step=any placeholder="Humidity">
-                <span class="input-group-text">Wind.Speed..km.h.</span>
-                <input type="number" class="form-control me-2" name="Wind speed" step=any id="Wind speed"
-                    placeholder="Wind speed">
-                <span class="input-group-text">Visibility</span>
-                <input type="number" class="form-control me-2" name="Visibility" step=any id="Visibility"
-                    placeholder="Visibility">
-            </div>
-            <div class="input-group mb-3 mx-1">
-                <span class="input-group-text">Pressure</span>
-                <input type="number" class="form-control me-2" name="Pressure" id="Pressure" step=any placeholder="Pressure">
-                <span class="input-group-text">so2</span>
-                <input type="number" class="form-control me-2" name="so2" id="so2" step=any placeholder="so2">
-                <span class="input-group-text">no2</span>
-                <input type="number" class="form-control me-2" name="no2" id="no2" step=any placeholder="no2">
-                <span class="input-group-text">Rainfall</span>
-                <input type="number" class="form-control me-2" name="Rainfall" id="Rainfall" step=any placeholder="Rainfall">
-            </div>
-        </div>
-        <div class="container" style="width: 50%;">
-            <div class="input-group mb-3 mx-1">
-                <span class="input-group-text">PM10</span>
-                <input type="number" class="form-control me-2" name="PM10" id="PM10" placeholder="PM10">
-                <span class="input-group-text">PM25</span>
-                <input type="number" class="form-control me-2" name="PM25" id="PM25" step=any placeholder="PM25">
-            </div>
-        </div>
-
-        <div class="d-grid gap-2 col-6 mx-auto" style="height: 10px;width: 70px;">
-            <button type="submit" class="btn btn-dark">Predict</button>
-        </div>
-    </form>
-
-    <!--Creating a table-->
-    <div class="container my-3">
-        <h2>Your Predictions</h2>
-        {% if allFeat|length==0 %}
-        <div class="alert alert-dark" role="alert">
-            No Prediction found. Enter your input to predict AQI!
-        </div>
-        {% else %}
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">S.No.</th>
-                    <th scope="col">Temperature</th>
-                    <th scope="col">Humidity</th>
-                    <th scope="col">Wind Speed</th>
-                    <th scope="col">Visibility</th>
-                    <th scope="col">Pressure</th>
-                    <th scope="col">so2</th>
-                    <th scope="col">no2</th>
-                    <th scope="col">Rainfall</th>
-                    <th scope="col">PM10</th>
-                    <th scope="col">PM25</th>
-                    <th scope="col">Prediction</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                {% for feat in allFeat %}
-                <tr>
-                    <th scope="row">{{loop.index}}</th>
-                    <td>{{feat.Temperature}}</td>
-                    <td>{{feat.Humidity}}</td>
-                    <td>{{feat.Wind_Speed}}</td>
-                    <td>{{feat.Visibility}}</td>
-                    <td>{{feat.Pressure}}</td>
-                    <td>{{feat.so2}}</td>
-                    <td>{{feat.no2}}</td>
-                    <td>{{feat.Ranifall}}</td>
-                    <td>{{feat.PM10}}</td>
-                    <td>{{feat.PM25}}</td>
-                    <td>{{feat.prediction}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% endif %}
     </div>
-</body>
+    <div class="container" style="width: 80%;">
+        <div class="input-group mb-3 mx-1">
+            <span class="input-group-text">Temperature</span>
+            <input type="number" class="form-control me-2" name="Temperature" id="Temperature" step=any
+                placeholder="Temperature">
+            <span class="input-group-text">Humidity</span>
+            <input type="number" class="form-control me-2" name="Humidity" id="Humidity" step=any
+                placeholder="Humidity">
+            <span class="input-group-text">Wind.Speed..km.h.</span>
+            <input type="number" class="form-control me-2" name="Wind speed" step=any id="Wind speed"
+                placeholder="Wind speed">
+            <span class="input-group-text">Visibility</span>
+            <input type="number" class="form-control me-2" name="Visibility" step=any id="Visibility"
+                placeholder="Visibility">
+        </div>
+        <div class="input-group mb-3 mx-1">
+            <span class="input-group-text">Pressure</span>
+            <input type="number" class="form-control me-2" name="Pressure" id="Pressure" step=any
+                placeholder="Pressure">
+            <span class="input-group-text">so2</span>
+            <input type="number" class="form-control me-2" name="so2" id="so2" step=any placeholder="so2">
+            <span class="input-group-text">no2</span>
+            <input type="number" class="form-control me-2" name="no2" id="no2" step=any placeholder="no2">
+            <span class="input-group-text">Rainfall</span>
+            <input type="number" class="form-control me-2" name="Rainfall" id="Rainfall" step=any
+                placeholder="Rainfall">
+        </div>
+    </div>
+    <div class="container" style="width: 50%;">
+        <div class="input-group mb-3 mx-1">
+            <span class="input-group-text">PM10</span>
+            <input type="number" class="form-control me-2" name="PM10" id="PM10" placeholder="PM10">
+            <span class="input-group-text">PM25</span>
+            <input type="number" class="form-control me-2" name="PM25" id="PM25" step=any placeholder="PM25">
+        </div>
+    </div>
 
-</html>
+    <div class="d-grid gap-2 col-6 mx-auto" style="height: 10px;width: 70px;">
+        <button type="submit" class="btn btn-dark">Predict</button>
+    </div>
+</form>
+
+<!--Creating a table-->
+<div class="container my-3">
+    <h2>Your Predictions</h2>
+    {% if allFeat|length==0 %}
+    <div class="alert alert-dark" role="alert">
+        No Prediction found. Enter your input to predict AQI!
+    </div>
+    {% else %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">S.No.</th>
+                <th scope="col">Temperature</th>
+                <th scope="col">Humidity</th>
+                <th scope="col">Wind Speed</th>
+                <th scope="col">Visibility</th>
+                <th scope="col">Pressure</th>
+                <th scope="col">so2</th>
+                <th scope="col">no2</th>
+                <th scope="col">Rainfall</th>
+                <th scope="col">PM10</th>
+                <th scope="col">PM25</th>
+                <th scope="col">Prediction(AQI)</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for feat in allFeat %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{feat.Temperature}}</td>
+                <td>{{feat.Humidity}}</td>
+                <td>{{feat.Wind_Speed}}</td>
+                <td>{{feat.Visibility}}</td>
+                <td>{{feat.Pressure}}</td>
+                <td>{{feat.so2}}</td>
+                <td>{{feat.no2}}</td>
+                <td>{{feat.Ranifall}}</td>
+                <td>{{feat.PM10}}</td>
+                <td>{{feat.PM25}}</td>
+                <td>{{feat.prediction}}</td>
+                <td>
+                    <a href="/update/{{feat.SNo}}" type="button" class="btn btn-outline-dark btn-sm mx-1">Predict
+                        again</button>
+                        <a href="/delete/{{feat.SNo}}" type="button"
+                            class="btn btn-outline-dark btn-sm mx-1">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock body %}
