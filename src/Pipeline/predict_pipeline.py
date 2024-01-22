@@ -30,7 +30,26 @@ class PredictPipeline():
             prediction = model.predict(transformed_feature)
 
             logging.info('Prediction Done!')
-            return prediction
+            range = ''
+            if prediction>0 and prediction<=50:
+                range = 'Good'
+                    
+            if prediction>50 and prediction<=100:
+                range = 'Satisfactory'
+
+            if prediction>100 and prediction<=200:
+                range = 'Moderate'
+
+            if prediction>200 and prediction<=300:
+                range = 'Poor'
+
+            if prediction>300 and prediction<=400:
+                range = 'Very Poor'
+
+            if prediction>400:
+                range = 'Severe'
+
+            return (prediction,range)
         except Exception as e:
             raise CustomException(e, sys)
         

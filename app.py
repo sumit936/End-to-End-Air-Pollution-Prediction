@@ -22,6 +22,7 @@ class Prediction(db.Model):
     PM10 = db.Column(db.Integer,nullable = False)
     PM25 = db.Column(db.Float,nullable = False)
     prediction = db.Column(db.Float,nullable = False)
+    Quality = db.Column(db.String,nullable = False)
 
     def __repr__(self) -> str:
         return f"{self.SNo}-{self.prediction}"
@@ -55,7 +56,8 @@ def hello_world():
         
         df = data.get_data_as_data_frame()
         pred = PredictPipeline()
-        preds = round(pred.predict(df),2)
+        p, quality = pred.predict(df)
+        preds = round(p,2)
         PredObj = Prediction(
                             Temperature = Temp,
                             Humidity = Hum,
@@ -67,7 +69,8 @@ def hello_world():
                             Rainfall = Rain,
                             PM10 = PM10,
                             PM25 = PM25,
-                            prediction = preds
+                            prediction = preds,
+                            Quality = quality
                             )
         db.session.add(PredObj)
         db.session.commit()
@@ -101,7 +104,8 @@ def update(SNo):
         
         df = data.get_data_as_data_frame()
         pred = PredictPipeline()
-        preds = round(pred.predict(df),2)
+        p, quality = pred.predict(df)
+        preds = round(p,2)
         predobj = Prediction(
                             Temperature = Temp,
                             Humidity = Hum,
@@ -113,7 +117,8 @@ def update(SNo):
                             Rainfall = Rain,
                             PM10 = PM10,
                             PM25 = PM25,
-                            prediction = preds
+                            prediction = preds,
+                            Quality = quality
                             )
         
         db.session.add(predobj)
