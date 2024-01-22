@@ -18,7 +18,7 @@ class Prediction(db.Model):
     Pressure = db.Column(db.Float,nullable = False)
     so2 = db.Column(db.Float,nullable = False)
     no2 = db.Column(db.Float,nullable = False)
-    Ranifall = db.Column(db.Float,nullable = False)
+    Rainfall = db.Column(db.Float,nullable = False)
     PM10 = db.Column(db.Integer,nullable = False)
     PM25 = db.Column(db.Float,nullable = False)
     prediction = db.Column(db.Float,nullable = False)
@@ -64,7 +64,7 @@ def hello_world():
                             Pressure = Pres,
                             so2 = so2,
                             no2 = no2,
-                            Ranifall = Rain,
+                            Rainfall = Rain,
                             PM10 = PM10,
                             PM25 = PM25,
                             prediction = preds
@@ -110,7 +110,7 @@ def update(SNo):
                             Pressure = Pres,
                             so2 = so2,
                             no2 = no2,
-                            Ranifall = Rain,
+                            Rainfall = Rain,
                             PM10 = PM10,
                             PM25 = PM25,
                             prediction = preds
