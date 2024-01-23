@@ -1,28 +1,24 @@
-Certainly! Here's the modified README file with an updated overview and the new section for machine learning algorithms used:
-
----
-
 # Air Quality Prediction End-to-End Project
 
 ## Overview
 
-This is an end-to-end project demonstrating knowledge in predicting the Air Quality Index (AQI) based on user input using machine learning. The project is implemented in Python and HTML, with Flask used to convert it into a web application.
+This is an end-to-end project demonstrating prediction of the Air Quality Index (AQI) based on user input using machine learning. The project is implemented in Python and HTML, with Flask used to convert it into a web application.
 
 ## Components
 
 ### 1. Data Ingestion
-- [Provide a brief description of the data ingestion component and its role.]
+Data ingestion takes a .csv dataset, splits it into training and testing sets, saves it into the artifacts folder with the full unsplit dataset, and returns the training and testing arrays.
 
 ### 2. Data Transformation
-- [Briefly explain the purpose and functionality of the data transformation component.]
+Data transformation removes outliers from the data, normalizes, and scales the data using Pipeline, FunctionTransformer, and ColumnTransformer.
 
 ### 3. Model Trainer
-- [Describe the model trainer component, including the machine learning model used and its purpose.]
+Model Trainer trains the data on all the below-mentioned machine learning models with the best parameters obtained using hyperparameter training. At last, it saves the pickle file of the best model to the artifacts folder for later use.
 
 ## Pipeline
 
 ### Predict Pipeline
-- [Explain the predict pipeline, detailing how the components work together to predict the Air Quality Index.]
+The predict pipeline takes the user input, converts the data into a Pandas data frame, and uses this data frame to predict the Air Quality Index. Based on the predicted Air Quality Index,categorizes it into different categories.
 
 ## Machine Learning Algorithms Used
 
@@ -35,6 +31,13 @@ The project employs the following machine learning algorithms for predicting the
 - K-Nearest Neighbors (KNN)
 - AdaBoost
 
+## Core Libraries Used
+
+- pandas
+- numpy
+- scikit-learn
+- Flask
+
 ## Technologies Used
 - Python
 - HTML
@@ -43,33 +46,15 @@ The project employs the following machine learning algorithms for predicting the
 ## Setup and Installation
 
 ### Prerequisites
-- [List any dependencies or prerequisites needed to run the project.]
-
-### Installation Steps
-1. [Provide step-by-step instructions on how to install and set up the project.]
+- Python
 
 ## Usage
 
-- [Include instructions on how to use the web application for predicting the Air Quality Index.]
+- Prediction of the Air quality index with its Air Quality category.
 
-## Sample Code Snippet
+## Web App Snippet
 
-```python
-# Provide a code snippet to showcase a key part of your project, if applicable.
-```
-
-## Contributions
-
-- [Guide on how others can contribute to the project or report issues.]
-
-## Additional Information
-
-- [Include any other relevant information, such as limitations, future enhancements, or acknowledgments.]
-
-## License
-
-This project is licensed under the [License Name] - see the [LICENSE.md](LICENSE.md) file for details.
+![image](https://github.com/sumit936/End-to-End-Air-Pollution-Prediction/assets/47924474/76bd5037-93ca-42c4-8340-bbaee114b776)
 
 ---
-
-Feel free to further customize the sections or add more details as needed for your project.
+let me know if you have any specific additions or changes in mind.
