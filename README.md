@@ -31,7 +31,7 @@ The project employs the following machine learning algorithms for predicting the
 - K-Nearest Neighbors (KNN)
 - AdaBoost
 
-## Core Libraries Used
+## Dependencies
 
 - pandas
 - numpy
